@@ -5,9 +5,7 @@ const path = require('path');
 const cors = require('cors');
 
 // 导入路由
-const ssoRoutes = require('./routes/sso');
 const rolesRoutes = require('./routes/roles');
-const mockSsoRoutes = require('./routes/mock-sso');
 
 const app = express();
 const port = 3000;
@@ -43,57 +41,7 @@ db.connect((err) => {
 });
 
 // 路由配置
-app.use('/api/sso', ssoRoutes);
 app.use('/api/roles', rolesRoutes);
-app.use('/mock-sso', mockSsoRoutes); // 模拟统一登录接口
-
-// 退出登录页面
-app.get('/logout', (req, res) => {
-    res.send(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>退出登录</title>
-            <style>
-                body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-                .logout-container { max-width: 400px; margin: 0 auto; }
-                .btn { padding: 10px 20px; margin: 10px; border: none; border-radius: 5px; cursor: pointer; }
-                .btn-primary { background: #007bff; color: white; }
-                .btn-secondary { background: #6c757d; color: white; }
-            </style>
-        </head>
-        <body>
-            <div class="logout-container">
-                <h2>确认退出</h2>
-                <p>您确定要退出系统吗？</p>
-                <button class="btn btn-primary" onclick="logout()">确认退出</button>
-                <button class="btn btn-secondary" onclick="cancel()">取消</button>
-            </div>
-            <script>
-                function logout() {
-                    // 清除本地存储
-                    localStorage.removeItem('sso_user_info');
-                    localStorage.removeItem('sso_login_time');
-                    localStorage.removeItem('sso_exiturl');
-                    
-                    // 跳转到统一登录系统
-                    const exiturl = localStorage.getItem('sso_exiturl');
-                    if (exiturl) {
-                        window.location.href = exiturl;
-                    } else {
-                        // 如果没有退出地址，跳转到模拟统一登录页面
-                        window.location.href = '/test-sso.html';
-                    }
-                }
-                
-                function cancel() {
-                    window.history.back();
-                }
-            </script>
-        </body>
-        </html>
-    `);
-});
 
 // 数据查询SQL
 const table_show = `
@@ -159,11 +107,10 @@ GROUP BY
 
 // 启动服务器
 const server = app.listen(port, () => {
-    console.log(`🚀 Vue Dashboard 后端服务启动成功！`);
-    console.log(`📊 数据可视化平台: http://localhost:${port}`);
-    console.log(`🔐 SSO测试页面: http://localhost:${port}/test-sso.html`);
-    console.log(`🌐 前端页面: http://localhost:3001`);
-    console.log(`📡 WebSocket服务: ws://localhost:${port}`);
+    console.log(`后端服务启动成功！`);
+    console.log(`数据可视化平台: http://localhost:${port}`);
+    console.log(`前端页面: http://localhost:3001`);
+    //console.log(`WebSocket服务: ws://localhost:${port}`);
 });
 
 // WebSocket服务器

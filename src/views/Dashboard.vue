@@ -39,22 +39,14 @@ let wsManager = null
 
 // 初始化用户信息
 const initUserInfo = () => {
-  const userInfo = localStorage.getItem('sso_user_info')
-  if (userInfo) {
-    try {
-      const user = JSON.parse(userInfo)
-      store.setUserInfo(user)
-    } catch (error) {
-      console.error('解析用户信息失败:', error)
-    }
-  } else {
-    // 如果没有用户信息，检查是否是从SSO页面跳转过来的
-    const urlParams = new URLSearchParams(window.location.search)
-    if (urlParams.get('code')) {
-      // 如果有code参数，说明是从统一登录跳转过来的，需要验证
-      window.location.href = '/sso' + window.location.search
-    }
+  // 移除SSO相关代码，直接设置默认用户信息
+  const defaultUser = {
+    username: '默认用户',
+    nickname: '系统用户',
+    roleid: '1',
+    xzqh: '610100'
   }
+  store.setUserInfo(defaultUser)
 }
 
 // 处理重连

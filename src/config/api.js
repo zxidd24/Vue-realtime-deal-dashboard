@@ -10,11 +10,7 @@ export const MAP_DATA_URL = `${API_BASE_URL}/assets/Data/陕西街道.geojson`
 
 // API端点
 export const API_ENDPOINTS = {
-  SSO_VALIDATE: `${API_BASE_URL}/api/sso/validate`,
-  SSO_LOGOUT: `${API_BASE_URL}/api/sso/logout`,
-  USER_INFO: `${API_BASE_URL}/api/sso/user-info`,
-  ROLES: `${API_BASE_URL}/api/roles`,
-  MOCK_SSO_LOGIN: `${API_BASE_URL}/mock-sso/login`
+  ROLES: `${API_BASE_URL}/api/roles`
 }
 
 // WebSocket配置

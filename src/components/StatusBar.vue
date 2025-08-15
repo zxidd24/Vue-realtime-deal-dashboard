@@ -98,15 +98,8 @@ const handleExport = () => {
 const handleLogout = () => {
   if (confirm('确定要退出系统吗？')) {
     store.clearUserInfo()
-    localStorage.removeItem('sso_user_info')
-    localStorage.removeItem('sso_login_time')
-    
-    const exiturl = localStorage.getItem('sso_exiturl')
-    if (exiturl) {
-      window.location.href = exiturl
-    } else {
-      router.push('/test-sso')
-    }
+    // 移除SSO相关代码，直接刷新页面
+    window.location.reload()
   }
 }
 
