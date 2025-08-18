@@ -19,6 +19,8 @@
     <StatsCards />
     
     <DataTable />
+    
+    <BackToTop />
   </div>
 </template>
 
@@ -32,6 +34,7 @@ import DistrictButtons from '../components/DistrictButtons.vue'
 import MapChart from '../components/MapChart.vue'
 import StatsCards from '../components/StatsCards.vue'
 import DataTable from '../components/DataTable.vue'
+import BackToTop from '../components/BackToTop.vue'
 import * as XLSX from 'xlsx'
 
 const store = useDashboardStore()
